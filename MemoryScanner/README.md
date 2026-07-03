@@ -5,8 +5,7 @@
 This repository documents my journey toward learning reverse engineering by building small tools from scratch.
 
 
-
-My goal is to understand the operating system concepts behind them.
+My goal is to understand the operating system concepts that make these tools possible.
 
 
 
@@ -122,7 +121,7 @@ Some questions I hope to answer in the future include:
 
 \- How do reverse engineers locate data without source code?
 
-\- How do anti-cheat systems detect memory altercation?
+\- How do anti-cheat systems detect memory manipulation?
 
 
 
