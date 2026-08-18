@@ -33,25 +33,22 @@ int main()
     }
 
     // ***全部改用寬字元串流***
-    std::wcout << L"process name: " << pe.szExeFile << L" PID: " << pe.th32ProcessID << L" Threads: " << pe.cntThreads << std::endl;
+    std::wcout << L"process name: " << pe.szExeFile 
+               << L" PID: " << pe.th32ProcessID 
+               << L" Threads: " << pe.cntThreads 
+               << std::endl;
 
-    bool next;
-    next = Process32Next(                 // fill up the next sheet
-        snap,
-        &pe
-    );
 
-    if (next) {
-        while (GetLastError() != ERROR_NO_MORE_FILES) {
-            next = Process32Next(                 // fill up the next sheet
-                snap,
-                &pe
-            );
-            std::wcout << L"process name: " << pe.szExeFile << L" PID: " << pe.th32ProcessID << L" Threads: " << pe.cntThreads << std::endl;
-        }
+    while (Process32Next(snap, &pe)) {                 // keep listing if there's still next
+    std::wcout
+        << L"process name: " << pe.szExeFile
+        << L" PID: " << pe.th32ProcessID
+        << L" Threads: " << pe.cntThreads
+        << std::endl;
     }
-    else {
-        std::cout << "failed to copy next entry of process list. \n";
+
+    if (GetLastError() != ERROR_NO_MORE_FILES) {
+        std::cout << "Process32Next failed.\n";
     }
 
     handle_closeing = CloseHandle(snap);
