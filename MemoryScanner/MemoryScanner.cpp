@@ -33,7 +33,7 @@ int main()
     }
 
     // ***全部改用寬字元串流***
-    std::wcout << L"process name: " << pe.szExeFile << L" PID: " << pe.th32ProcessID << std::endl;
+    std::wcout << L"process name: " << pe.szExeFile << L" PID: " << pe.th32ProcessID << L" Threads: " << pe.cntThreads << std::endl;
 
     bool next;
     next = Process32Next(                 // fill up the next sheet
@@ -47,7 +47,7 @@ int main()
                 snap,
                 &pe
             );
-            std::wcout << L"process name: " << pe.szExeFile << L" PID: " << pe.th32ProcessID << std::endl;
+            std::wcout << L"process name: " << pe.szExeFile << L" PID: " << pe.th32ProcessID << L" Threads: " << pe.cntThreads << std::endl;
         }
     }
     else {
