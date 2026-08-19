@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MemoryScanner.cpp">
+    <ClCompile Include="ProcessInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

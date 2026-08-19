@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{83cb6b48-a085-42f5-99eb-bbd1ec18c663}</ProjectGuid>
-    <RootNamespace>MemoryScanner</RootNamespace>
+    <ProjectGuid>{07c33220-f8f5-4f98-a9f0-316bba39e73e}</ProjectGuid>
+    <RootNamespace>ProcessInspector</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MemoryScanner.cpp" />
+    <ClCompile Include="ProcessInspector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

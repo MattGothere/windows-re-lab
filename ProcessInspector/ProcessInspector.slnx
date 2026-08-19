@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="MemoryScanner.vcxproj" Id="83cb6b48-a085-42f5-99eb-bbd1ec18c663" />
+  <Project Path="ProcessInspector.vcxproj" />
 </Solution>
