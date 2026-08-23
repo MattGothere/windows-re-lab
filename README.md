@@ -24,3 +24,10 @@ Current Understanding
 Evidence
     ↓
 Open Questions
+```
+
+---
+
+## Note
+
+The technical work, experiments, and conclusions in this repository are my own. AI tools are occasionally used for English translation and proofreading.
