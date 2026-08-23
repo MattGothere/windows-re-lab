@@ -18,7 +18,7 @@
     <ClCompile Include="ProcessInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testfiled.cpp">
+    <ClCompile Include="process_lookup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
