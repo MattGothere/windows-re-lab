@@ -3,8 +3,8 @@
 #include <tlhelp32.h>
 
 int main() {
-    // goal : to list the "Notepad.exe"'s threads
-    // 
+    // goal 1 : to list the "Notepad.exe"'s threads
+    //      2 : show the executable path 
     // =======================================================
     // thoughts : enumerate all the threads in the system, and
     //            find the parent process by comparing.
@@ -30,8 +30,8 @@ int main() {
         return 0;
     }
 
-    if (ProcSnap == INVALID_HANDLE_VALUE) {
-        std::cout << "error : modu with INVALID_HANDLE_VALUE \n ";
+    if (ThreSnap == INVALID_HANDLE_VALUE) {
+        std::cout << "error : thre with INVALID_HANDLE_VALUE \n ";
         return 0;
     }
 
@@ -41,7 +41,7 @@ int main() {
     PROCESSENTRY32 pListEntry;
     pListEntry.dwSize = sizeof(PROCESSENTRY32);
 
-    // ======== gathering snapshots information ========
+    // ======== gathering *Proc \ Thre* snapshots information ========
 
     bool FirstProc = Process32First(
         ProcSnap,
@@ -92,6 +92,38 @@ int main() {
 
     std::wcout << L"PID: " << targetID << std::endl;
 
+    // ======== finding target's executable path ========
+    
+    HANDLE ModuSnap = CreateToolhelp32Snapshot(
+        TH32CS_SNAPMODULE,
+        targetID
+    );
+
+    if (ModuSnap == INVALID_HANDLE_VALUE) {
+        std::cout << "error: modu with INVALID_HANDLE_VALUE \n ";
+        return 0;
+    }
+
+    MODULEENTRY32 mListEntry;
+    mListEntry.dwSize = sizeof(MODULEENTRY32);
+
+    bool FirstModu = Module32First(
+        ModuSnap,
+        &mListEntry
+    );
+
+    if (!FirstModu) {
+        std::cout << "failed to copy modu list. \n";
+
+        DWORD errorCode = GetLastError();
+        std::cout << "error code: " << errorCode << std::endl;
+        CloseHandle(ModuSnap);  
+        return 0;
+    }
+
+    std::wcout << L"executable path: " << mListEntry.szExePath << std::endl;
+
+
     // ======== finding target's thread ========
 
     // compare the first
@@ -113,5 +145,6 @@ int main() {
 
     CloseHandle(ProcSnap);
     CloseHandle(ThreSnap);
+    CloseHandle(ModuSnap);
     return 0;
 }
