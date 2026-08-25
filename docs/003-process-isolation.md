@@ -65,11 +65,14 @@ The thread count from `PROCESSENTRY32::cntThreads` matched my enumeration result
 
 **Question:** Can one process obtain the executable path of another process?
 
-**Method:** TODO
+**Method:** 
+I reuse the process lookup to find the target's PID for me to get the module snapshot of it. Then, by using first module information, we can then bring out the `MODULEENTRY32::szExePath` to get the executable path of a process. 
 
-**Result:** TODO
+**Result:** 
+I successfully find and print the executable path of another process on screen.
 
-**Observation:** TODO
+**Observation:** 
+In my experiment, the first module returned by `Module32First` provided the path to the target process's executable through `MODULEENTRY32::szExePath`. I still need to understand why the first module corresponds to the main executable.
 
 ---
 
