@@ -4,31 +4,31 @@
 
 int main()
 {
-    HANDLE snap; // create a handle, helping us to access proccess information                        
-    bool handle_closeing;
+    HANDLE Procsnap; // create a handle, helping us to access proccess information
+    HANDLE Modusnap;
 
-    snap = CreateToolhelp32Snapshot(
+    Procsnap = CreateToolhelp32Snapshot(
         TH32CS_SNAPPROCESS,             // include all process in the system
         0                               // current process
     );
 
-    if (snap == INVALID_HANDLE_VALUE) {
-        std::cout << "failed to create snapshot. \n";
+    if (Procsnap == INVALID_HANDLE_VALUE) {
+        std::cout << "failed to create Process snapshot. \n";
         return 0;
     }
 
     PROCESSENTRY32 pe;                    // open up a "sheet" to let functions fill in   
     pe.dwSize = sizeof(pe);    // initialize dwsize
 
-    bool first;
-    first = Process32First(                 // fill up the very first sheet
-        snap,
+    bool firstProc;
+    firstProc = Process32First(                 // fill up the very first sheet
+        Procsnap,
         &pe
     );
 
-    if (!first) {
+    if (!firstProc) {
         std::cout << "failed to copy process list. \n";
-        handle_closeing = CloseHandle(snap);            // close the handle if failed
+        CloseHandle(Procsnap);            // close the handle if failed
         return 0;
     }
 
@@ -39,7 +39,7 @@ int main()
         << std::endl;
 
 
-    while (Process32Next(snap, &pe)) {                 // keep listing if there's still next
+    while (Process32Next(Procsnap, &pe)) {                 // keep listing if there's still next
         std::wcout
             << L"process name: " << pe.szExeFile
             << L" PID: " << pe.th32ProcessID
@@ -51,7 +51,7 @@ int main()
         std::cout << "Process32Next failed.\n";
     }
 
-    handle_closeing = CloseHandle(snap);
+    CloseHandle(Procsnap);
 
     return 0;
 }
